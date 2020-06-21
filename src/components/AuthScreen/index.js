@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {AuthService} from '../../services';
+import {AuthService, CallService} from '../../services';
 import {showAlert} from '../../helpers/Alert';
 
 export default class AuthScreen extends PureComponent {
@@ -59,6 +59,7 @@ Please Login/SignUp directly to proceed further.`,
         const opponentsIds = [];
         const currentUserLoginId = currentUser.loginName;
         const currentUserFullName = resp.user.full_name;
+        CallService.showToast('Login Successful.');
         navigation.push('VideoScreen', {
           opponentsIds,
           currentUserLoginId,
@@ -67,15 +68,8 @@ Please Login/SignUp directly to proceed further.`,
       };
 
       const onFailLogin = (error = {}) => {
-        showAlert(
-          `Error.\n\n${
-            // JSON.parse(JSON.stringify(err)).code == '401'
-            //   ? 'Invalid User Name or Password.'
-            //   : JSON.parse(JSON.stringify(err)).info.errors[0]
-            'Invalid User Name or Password.'
-          }`,
-          'Login Error',
-        );
+        console.log(error);
+        showAlert('Invalid User Name or Password.', 'Login Error');
       };
 
       this.setIsLogging(true);
@@ -85,7 +79,7 @@ Please Login/SignUp directly to proceed further.`,
         password: currentUser.password,
       })
         .then(resp => onSuccessLogin(resp))
-        .catch(onFailLogin)
+        .catch(err => onFailLogin(err))
         .then(() => this.setIsLogging(false));
     }
   };
@@ -150,7 +144,7 @@ Password: Min 8 Characters`,
             this.setState({isLoader: false});
             this.setIsLogging(false);
             this.setState({view: 'login'});
-            showAlert(`Account successfully registered.
+            CallService.showToast(`Account successfully registered.
 Please Login with your details.`);
             // ? automatic login commented
             // const {navigation} = this.props;
@@ -320,7 +314,7 @@ Please Login with your details.`);
                 <TextInput
                   style={[styles.searchInput]}
                   autoCapitalize="none"
-                  placeholder="Enter Full name"
+                  placeholder="Enter Your name"
                   returnKeyType="search"
                   onChangeText={keyword =>
                     this.setState({
@@ -335,7 +329,7 @@ Please Login with your details.`);
                 <TextInput
                   style={[styles.searchInput]}
                   autoCapitalize="none"
-                  placeholder="Login name (Email Address)"
+                  placeholder="Login name (Email)"
                   returnKeyType="search"
                   onChangeText={keyword =>
                     this.setState({

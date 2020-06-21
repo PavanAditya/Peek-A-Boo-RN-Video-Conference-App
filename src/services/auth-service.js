@@ -1,6 +1,6 @@
 import ConnectyCube from 'react-native-connectycube';
 import config from '../helpers/config';
-import {AsyncStorage} from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class AuthService {
   static CURRENT_USER_SESSION_KEY = 'CURRENT_USER_SESSION_KEY';
@@ -30,19 +30,21 @@ export default class AuthService {
 
   login = user => {
     return new Promise(async (resolve, reject) => {
-      const session = await ConnectyCube.createSession(user);
+      const session = await ConnectyCube.createSession(user).catch(err =>
+        reject(err),
+      );
       this.setStoreToken(session);
       this.setUserSession(session);
       ConnectyCube.createSession(user)
-        .then(() => {
+        .then(async () => {
           console.log(session.user.id, 'kjsadkjsjsd');
-          ConnectyCube.chat.connect({
+          await ConnectyCube.chat.connect({
             userId: session.user.id,
             password: user.password,
           });
         })
         .then(resolve(session))
-        .catch(reject);
+        .catch(err => reject(err));
     });
   };
 

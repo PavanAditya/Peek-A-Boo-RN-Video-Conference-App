@@ -193,6 +193,11 @@ export default class VideoScreen extends React.Component {
       .catch(this.hideInomingCallModal);
   };
 
+  getUserName = id => {
+    console.log('11');
+    CallService.getUserById(id, 'name');
+  };
+
   render() {
     const {
       localStream,
@@ -204,7 +209,7 @@ export default class VideoScreen extends React.Component {
     } = this.state;
 
     const initiatorName = isIncomingCall
-      ? CallService.getUserById(this._session.initiatorID, 'name')
+      ? this.getUserName(this._session.initiatorID)
       : '';
     const localStreamItem = localStream
       ? [{userId: 'localStream', stream: localStream}]

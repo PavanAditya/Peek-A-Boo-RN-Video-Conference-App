@@ -61,7 +61,7 @@ export default ({
 
   const logout = () => {
     Alert.alert(
-      'Profile Details',
+      'Caution!',
       'You sure you want to logout?',
       [
         {
@@ -104,34 +104,31 @@ Email:  ${currentUserLoginId}`,
 
   const findContact = async searchedLoginName => {
     if (!checkValidLoginName()) {
-      alert('Enter a valid Login Name');
+      showAlert('Enter a valid Login Name', 'Invalid Input');
     } else if (inTheArray(searchedLoginName)) {
-      alert('This user already exixts in the group.');
+      showAlert('This user already exixts in the group.', 'Duplicate');
     } else {
       console.log(contactsList, 'list');
       console.log(contactsList.length, 'lennn');
       if (contactsList.length >= 3) {
-        alert('Only 4 Users are allowed');
+        showAlert('Max 4 Users are allowed(Incl You).', 'Limit reached');
       } else {
         setContactLoading(true);
-        setContactsList([
-          await CallService.getUserByLogin(
-            searchedLoginName,
-            currentUserLoginId,
-          ).catch(err =>
-            alert(
-              `Error.\n\n${
-                JSON.parse(JSON.stringify(err)).code == '401'
-                  ? 'Unauthorized. Please Login Again.'
-                  : JSON.parse(JSON.stringify(err)).code == '404'
-                  ? "Couldn't find the User with login Name:\n" +
-                    searchedLoginName
-                  : 'Server Error. Pleas login and try again.'
-              }`,
-            ),
-          ),
-          ...contactsList,
-        ]);
+        const searchedUser = await CallService.getUserByLogin(
+          searchedLoginName,
+          currentUserLoginId,
+        ).catch();
+        console.log(searchedUser, 'bale');
+        console.log(searchedUser.length, 'bool');
+        console.log(searchedUser[0], 'bool');
+        console.log(searchedUser == [], 'bool');
+        console.log(searchedUser === [], 'bool');
+        await setContactsList(
+          !searchedUser.length
+            ? [...contactsList]
+            : [...contactsList, searchedUser],
+        );
+        console.log(contactsList, 'kdksdksd');
         setSearchValue('');
         setContactLoading(false);
       }
@@ -148,7 +145,12 @@ Email:  ${currentUserLoginId}`,
               source={require('../../../assets/logout.png')}
             />
           </TouchableOpacity>
-          <Text style={styles.name}>{'Welcome\n' + currentUserFullName}</Text>
+          <Text style={styles.name}>
+            {'Welcome\n' +
+              (currentUserFullName.length > 15
+                ? currentUserFullName.slice(0, 15) + '...'
+                : currentUserFullName)}
+          </Text>
           <TouchableOpacity
             onPress={() => profileDetails()}
             style={styles.moreDetails}>
@@ -157,7 +159,7 @@ Email:  ${currentUserLoginId}`,
         </View>
       )}
       <Text style={styles.descriptionText}>
-        Enter the Login Name of your contact
+        Find any friend with his Login Name
       </Text>
       <View style={styles.description}>
         <TextInput
@@ -180,43 +182,49 @@ Email:  ${currentUserLoginId}`,
       </View>
 
       {contactsList[0] && (
-        <Text style={styles.title}>Select users to start Videocall</Text>
+        <Text style={styles.title}>Select any friends for the Videocall</Text>
       )}
       {contactsList[0] ? (
         contactsList.map(ele => {
           // const user = CallService.getUserById(id);
           let user = ele[0];
-          const selected = selectedUsersIds.some(userId => user.id === userId);
+          const selected = selectedUsersIds.some(
+            userId => user && user.id === userId,
+          );
           const type = selected
             ? 'radio-button-checked'
             : 'radio-button-unchecked';
-          user.color = user.color ? user.color : randomColor();
+          if (user) {
+            user.color = user.color ? user.color : randomColor();
+          }
           const onPress = selected ? unselectUser : selectUser;
           return (
-            <View>
-              <TouchableOpacity
-                style={styles.userLabel(
-                  user.color ? user.color : randomColor(),
-                )}
-                onPress={() => onPress(user.id)}>
-                <Text style={styles.userName}>
-                  {user.full_name.length > 20
-                    ? user.full_name.slice(0, 20) + '...'
-                    : user.full_name}
-                </Text>
-                <MaterialIcon name={type} size={20} color="white" />
-              </TouchableOpacity>
-            </View>
+            user && (
+              <View>
+                <TouchableOpacity
+                  style={styles.userLabel(
+                    user.color ? user.color : randomColor(),
+                  )}
+                  onPress={() => onPress(user.id)}>
+                  <Text style={styles.userName}>
+                    {user.full_name.length > 20
+                      ? user.full_name.slice(0, 20) + '...'
+                      : user.full_name}
+                  </Text>
+                  <MaterialIcon name={type} size={20} color="white" />
+                </TouchableOpacity>
+              </View>
+            )
           );
         })
       ) : (
         <View />
       )}
-      {contactLoading && (
+      {/* {contactLoading && (
         <Text size="small" color="white">
           Loading...
         </Text>
-      )}
+      )} */}
       {contactLoading && <ActivityIndicator size="small" color="white" />}
     </View>
   );
@@ -238,7 +246,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   name: {
-    fontSize: 30,
+    fontSize: 28,
+    width: 235,
     fontWeight: '700',
     color: '#009378',
   },
@@ -266,6 +275,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 5,
+    marginTop: 15,
     marginLeft: 50,
     paddingLeft: 65,
   }),
@@ -305,7 +315,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 190,
+    marginLeft: 250,
     marginTop: 10,
     paddingTop: 12,
     paddingLeft: 10,
@@ -320,7 +330,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 50,
     width: 50,
-    marginLeft: -125,
+    marginLeft: -75,
     marginTop: 15,
+    // backgroundColor: 'red',
   },
 });

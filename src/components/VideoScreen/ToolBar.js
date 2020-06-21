@@ -31,6 +31,7 @@ export default class ToolBar extends Component {
     } else {
       closeSelect();
       initRemoteStreams(selectedUsersIds);
+      CallService.showToast('Calling Friends.');
       CallService.startCall(selectedUsersIds).then(setLocalStream);
     }
   };

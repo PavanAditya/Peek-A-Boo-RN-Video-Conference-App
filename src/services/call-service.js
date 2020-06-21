@@ -5,6 +5,7 @@ import InCallManager from 'react-native-incall-manager';
 import Sound from 'react-native-sound';
 import {users} from '../helpers/config';
 import AuthService from 'react-native-connectycube/lib/cubeAuth';
+import {showAlert} from '../helpers/Alert';
 
 export default class CallService {
   static MEDIA_OPTIONS = {audio: true, video: {facingMode: 'user'}};
@@ -22,7 +23,7 @@ export default class CallService {
     commonToast.showWithGravity(text, Toast.LONG, Toast.TOP);
   };
 
-  getUserById = (userId, key) => {
+  getUserNameById = (userId, key) => {
     const user = users.find(user => user.id == userId);
 
     if (typeof key === 'string') {
@@ -32,22 +33,44 @@ export default class CallService {
     return user;
   };
 
+  getUserById = async (id, key) => {
+    let allUsers = [await ConnectyCube.users.get(id)];
+    console.log(allUsers, 'a;lllkhjg');
+    console.log(allUsers[0].user, 'a;lllkhjg user');
+    const contacts = allUsers.filter(ele => ele.user.id === id);
+
+    console.log(contacts, 'a;lllkhjg filtered');
+    if (key === 'name') {
+      return contacts[0].user.full_name;
+    } else {
+      return contacts[0].user[key];
+    }
+  };
+
   getUserByLogin = async (loginName, ignoreUser) => {
     // if (!ignoreUser) {
     //   ignoreUser = [this.currentUser.id];
     // }
-    let allUsers = [
-      await ConnectyCube.users.get({
-        per_page: 100,
-        login: loginName,
-      }),
-    ]; // ! hai
+    let allUsers;
     let contacts = [];
-    allUsers.forEach(elem => {
-      if (!ignoreUser.includes(elem.user.loginName)) {
-        contacts.push(elem.user);
-      }
-    });
+    try {
+      allUsers = [
+        await ConnectyCube.users.get({
+          per_page: 100,
+          login: loginName,
+        }),
+      ];
+      allUsers.forEach(elem => {
+        if (!ignoreUser.includes(elem.user.login)) {
+          contacts.push(elem.user);
+        } else {
+          showAlert("You can't add yourself", 'Ooopss');
+        }
+      });
+    } catch (err) {
+      showAlert("Couldn't find the User with login Name:\n" + loginName, '404');
+    }
+    console.log(contacts, 'vrey before');
     return contacts;
   };
 
@@ -70,11 +93,18 @@ export default class CallService {
       });
   };
 
-  startCall = ids => {
+  startCall = async ids => {
     const options = {};
     const type = ConnectyCube.videochat.CallType.VIDEO; // AUDIO is also possible
 
-    this._session = ConnectyCube.videochat.createNewSession(ids, type, options);
+    console.log(ids, 'callers list');
+    console.log(type, 'callers list');
+    console.log(options, 'callers list');
+    this._session = await ConnectyCube.videochat.createNewSession(
+      ids,
+      type,
+      options,
+    );
     this.setMediaDevices();
     this.playSound('outgoing');
 
@@ -122,6 +152,7 @@ export default class CallService {
       if (!this._session) {
         reject();
       } else {
+        console.log('3');
         const userName = this.getUserById(userId, 'name');
         const message = `${userName} did not answer`;
 
@@ -157,6 +188,7 @@ export default class CallService {
 
         reject();
       } else {
+        console.log('4');
         const userName = this.getUserById(userId, 'name');
         const message = `${userName} has accepted the call`;
 
@@ -176,6 +208,7 @@ export default class CallService {
 
         reject();
       } else {
+        console.log('5');
         const userName = this.getUserById(userId, 'name');
         const message = extension.busy
           ? `${userName} is busy`
@@ -195,6 +228,7 @@ export default class CallService {
       if (!this._session) {
         reject();
       } else {
+        console.log('6');
         const userName = this.getUserById(userId, 'name');
         const message = `${userName} has ${
           isInitiator ? 'stopped' : 'left'

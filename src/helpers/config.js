@@ -12,31 +12,31 @@ export default [
 export const users = [
   {
     id: 1,
-    name: "User1",
-    login: "videouser1",
-    password: "***",
-    color: "#34ad86"
+    name: 'User1',
+    login: 'videouser1',
+    password: '***',
+    color: '#34ad86',
   },
   {
     id: 2,
-    name: "User2",
-    login: "videouser2",
-    password: "***",
-    color: "#077988"
+    name: 'User2',
+    login: 'videouser2',
+    password: '***',
+    color: '#077988',
   },
   {
     id: 3,
-    name: "User3",
-    login: "videouser3",
-    password: "***",
-    color: "#13aaae"
+    name: 'User3',
+    login: 'videouser3',
+    password: '***',
+    color: '#13aaae',
   },
   {
     id: 4,
-    name: "User4",
-    login: "videouser4",
-    password: "***",
-    color: "#056a96"
+    name: 'User4',
+    login: 'videouser4',
+    password: '***',
+    color: '#056a96',
   },
 ];
 

@@ -4,7 +4,9 @@ import {ActivityIndicator, View, Text, StyleSheet} from 'react-native';
 export default ({name}) => (
   <View style={styles.container}>
     <View style={styles.info}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={styles.text}>
+        {name.length > 12 ? name.slice(0, 12) + '...' : name}
+      </Text>
       <ActivityIndicator size="small" color="white" />
     </View>
   </View>
@@ -22,9 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: 25,
+    fontSize: 23,
     fontStyle: 'italic',
     color: 'white',
-    marginRight: 16,
+    marginRight: 15,
   },
 });
