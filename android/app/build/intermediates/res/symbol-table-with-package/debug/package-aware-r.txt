@@ -1320,6 +1320,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable assets_hide
 drawable assets_logo
+drawable assets_logout
 drawable assets_view
 drawable avd_hide_password
 drawable avd_show_password

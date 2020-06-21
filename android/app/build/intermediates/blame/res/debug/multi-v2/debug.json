@@ -576,38 +576,6 @@
             ]
         },
         {
-            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-be_values-be.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\0fe0c5542339341af9ea34ee652d9c0f\\res\\values-be\\values-be.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,328,444,530,635,754,834,912,1004,1097,1192,1286,1382,1476,1572,1667,1759,1851,1931,2037,2142,2240,2348,2454,2562,2735,2835",
-                        "endColumns": "119,102,115,85,104,118,79,77,91,92,94,93,95,93,95,94,91,91,79,105,104,97,107,105,107,172,99,80",
-                        "endOffsets": "220,323,439,525,630,749,829,907,999,1092,1187,1281,1377,1471,1567,1662,1754,1846,1926,2032,2137,2235,2343,2449,2557,2730,2830,2911"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\36393f661b9af6d51be9c7c9745d3ac0\\res\\values-be\\values-be.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "30",
-                        "startColumns": "4",
-                        "startOffsets": "2916",
-                        "endColumns": "100",
-                        "endOffsets": "3012"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-ja_values-ja.arsc.flat",
             "map": [
                 {
@@ -635,6 +603,38 @@
                         "startOffsets": "2769",
                         "endColumns": "100",
                         "endOffsets": "2865"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-be_values-be.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\0fe0c5542339341af9ea34ee652d9c0f\\res\\values-be\\values-be.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,225,328,444,530,635,754,834,912,1004,1097,1192,1286,1382,1476,1572,1667,1759,1851,1931,2037,2142,2240,2348,2454,2562,2735,2835",
+                        "endColumns": "119,102,115,85,104,118,79,77,91,92,94,93,95,93,95,94,91,91,79,105,104,97,107,105,107,172,99,80",
+                        "endOffsets": "220,323,439,525,630,749,829,907,999,1092,1187,1281,1377,1471,1567,1662,1754,1846,1926,2032,2137,2235,2343,2449,2557,2730,2830,2911"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\36393f661b9af6d51be9c7c9745d3ac0\\res\\values-be\\values-be.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "30",
+                        "startColumns": "4",
+                        "startOffsets": "2916",
+                        "endColumns": "100",
+                        "endOffsets": "3012"
                     }
                 }
             ]
@@ -862,38 +862,6 @@
             ]
         },
         {
-            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-sv_values-sv.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\0fe0c5542339341af9ea34ee652d9c0f\\res\\values-sv\\values-sv.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,208,311,422,506,608,721,798,874,967,1061,1156,1250,1353,1448,1545,1643,1739,1832,1911,2017,2116,2212,2317,2420,2522,2676,2778",
-                        "endColumns": "102,102,110,83,101,112,76,75,92,93,94,93,102,94,96,97,95,92,78,105,98,95,104,102,101,153,101,78",
-                        "endOffsets": "203,306,417,501,603,716,793,869,962,1056,1151,1245,1348,1443,1540,1638,1734,1827,1906,2012,2111,2207,2312,2415,2517,2671,2773,2852"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\36393f661b9af6d51be9c7c9745d3ac0\\res\\values-sv\\values-sv.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "30",
-                        "startColumns": "4",
-                        "startOffsets": "2857",
-                        "endColumns": "100",
-                        "endOffsets": "2953"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-kk_values-kk.arsc.flat",
             "map": [
                 {
@@ -921,6 +889,38 @@
                         "startOffsets": "2877",
                         "endColumns": "100",
                         "endOffsets": "2973"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-sv_values-sv.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\0fe0c5542339341af9ea34ee652d9c0f\\res\\values-sv\\values-sv.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,208,311,422,506,608,721,798,874,967,1061,1156,1250,1353,1448,1545,1643,1739,1832,1911,2017,2116,2212,2317,2420,2522,2676,2778",
+                        "endColumns": "102,102,110,83,101,112,76,75,92,93,94,93,102,94,96,97,95,92,78,105,98,95,104,102,101,153,101,78",
+                        "endOffsets": "203,306,417,501,603,716,793,869,962,1056,1151,1245,1348,1443,1540,1638,1734,1827,1906,2012,2111,2207,2312,2415,2517,2671,2773,2852"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\36393f661b9af6d51be9c7c9745d3ac0\\res\\values-sv\\values-sv.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "30",
+                        "startColumns": "4",
+                        "startOffsets": "2857",
+                        "endColumns": "100",
+                        "endOffsets": "2953"
                     }
                 }
             ]
@@ -1236,6 +1236,21 @@
             ]
         },
         {
+            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-h360dp-land-v13_values-h360dp-land-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\311ed5afd1ac98516b96d1ae5b9134a0\\res\\values-h360dp-land-v13\\values-h360dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,170,226,293,358,413,478,547",
+                        "endColumns": "58,55,55,66,64,54,64,68,68",
+                        "endOffsets": "109,165,221,288,353,408,473,542,611"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-sr_values-sr.arsc.flat",
             "map": [
                 {
@@ -1263,21 +1278,6 @@
                         "startOffsets": "2919",
                         "endColumns": "100",
                         "endOffsets": "3015"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\MediaFiles\\Video Calling Android cordova\\RNVideoChat\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-h360dp-land-v13_values-h360dp-land-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\M1050962\\.gradle\\caches\\transforms-2\\files-2.1\\311ed5afd1ac98516b96d1ae5b9134a0\\res\\values-h360dp-land-v13\\values-h360dp-land-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,170,226,293,358,413,478,547",
-                        "endColumns": "58,55,55,66,64,54,64,68,68",
-                        "endOffsets": "109,165,221,288,353,408,473,542,611"
                     }
                 }
             ]
