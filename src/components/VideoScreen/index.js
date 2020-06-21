@@ -218,6 +218,7 @@ export default class VideoScreen extends React.Component {
         <StatusBar backgroundColor="black" barStyle="light-content" />
         <RTCViewGrid streams={streams} />
         <UsersSelect
+          navigation={this.props.navigation}
           isActiveSelect={isActiveSelect}
           opponentsIds={this.opponentsIds}
           currentUserLoginId={this.currentUserLoginId}

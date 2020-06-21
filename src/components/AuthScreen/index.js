@@ -34,29 +34,6 @@ Please Login/SignUp directly to proceed further.`,
     );
   };
 
-  // login = currentUser => {
-  //   const _onSuccessLogin = () => {
-  //     const {navigation} = this.props;
-  //     const opponentsIds = users
-  //       .filter(opponent => opponent.id !== currentUser.id)
-  //       .map(opponent => opponent.id);
-
-  //     const currentUserLoginId = currentUser.login;
-  //     navigation.push('VideoScreen', {opponentsIds, currentUserLoginId});
-  //   };
-
-  //   const _onFailLogin = (error = {}) => {
-  //     alert(`Error.\n\n${JSON.stringify(error)}`);
-  //   };
-
-  //   this.setIsLogging(true);
-
-  //   AuthService.login(currentUser)
-  //     .then(_onSuccessLogin)
-  //     .catch(_onFailLogin)
-  //     .then(() => this.setIsLogging(false));
-  // };
-
   validLoginName = loginName => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(loginName).toLowerCase());

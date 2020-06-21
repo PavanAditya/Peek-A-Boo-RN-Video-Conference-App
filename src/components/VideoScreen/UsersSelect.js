@@ -9,13 +9,18 @@ import {
   TextInput,
   Dimensions,
   ActivityIndicator,
+  Image,
+  Alert,
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {CallService} from '../../services';
+import {CallService, AuthService} from '../../services';
+import {showAlert} from '../../helpers/Alert';
+import AuthScreen from '../AuthScreen';
 
 const SIZE_SCREEN = Dimensions.get('window');
 
 export default ({
+  navigation,
   isActiveSelect,
   opponentsIds,
   selectedUsersIds,
@@ -52,6 +57,36 @@ export default ({
   const checkValidLoginName = () => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(searchValue).toLowerCase());
+  };
+
+  const logout = () => {
+    Alert.alert(
+      'Profile Details',
+      'You sure you want to logout?',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            AuthService.logout();
+            navigation.push('AuthScreen');
+          },
+          style: 'cancel',
+        },
+        {text: 'No'},
+      ],
+      {
+        cancelable: true,
+      },
+    );
+  };
+
+  const profileDetails = () => {
+    showAlert(
+      `Profile Name:  ${currentUserFullName}
+Login Name:  ${currentUserLoginId}
+Email:  ${currentUserLoginId}`,
+      'Profile Details',
+    );
   };
 
   const inTheArray = user => {
@@ -106,7 +141,20 @@ export default ({
   return (
     <View style={styles.container}>
       {currentUserFullName && (
-        <Text style={styles.name}>{'Welcome\n' + currentUserFullName}</Text>
+        <View>
+          <TouchableOpacity style={styles.logoutBtn} onPress={() => logout()}>
+            <Image
+              style={styles.logoutIcon}
+              source={require('../../../assets/logout.png')}
+            />
+          </TouchableOpacity>
+          <Text style={styles.name}>{'Welcome\n' + currentUserFullName}</Text>
+          <TouchableOpacity
+            onPress={() => profileDetails()}
+            style={styles.moreDetails}>
+            <Text style={styles.moreDetails}>{'Profile\nDetails'}</Text>
+          </TouchableOpacity>
+        </View>
       )}
       <Text style={styles.descriptionText}>
         Enter the Login Name of your contact
@@ -244,5 +292,35 @@ const styles = StyleSheet.create({
     color: '#177987',
     fontSize: 15,
     marginTop: 25,
+  },
+  moreDetails: {
+    color: '#177987',
+    fontWeight: '700',
+    borderColor: '#177987',
+    borderWidth: 3,
+    borderRadius: 50,
+    fontSize: 13,
+    height: 60,
+    width: 60,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 190,
+    marginTop: 10,
+    paddingTop: 12,
+    paddingLeft: 10,
+  },
+  logoutIcon: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    opacity: 0.8,
+  },
+  logoutBtn: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    marginLeft: -125,
+    marginTop: 15,
   },
 });
