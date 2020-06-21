@@ -39,7 +39,7 @@ The above command will automatically run your app on the iOS Simulator by defaul
 
 To make the sample works for your own app, please do the following:
 
-1.  Register new account and application at `https://admin.connectycube.com` and then put Application credentials from 'Overview' page into `src/config.js` file:
+1.  Register new account and application at `https://admin.connectycube.com` and then put Application credentials from 'Overview' page into `src/helpers/config.js` file:
 
     ```javascript
     export const credentials = {
@@ -49,7 +49,7 @@ To make the sample works for your own app, please do the following:
     };
     ```
 
-2.  At `https://admin.connectycube.com`, create from 2 to 4 users in 'Users' module and put them into `src/config.js` file:
+2.  At `https://admin.connectycube.com`, create from 2 to 4 users in 'Users' module and put them into `src/helpers/config.js` file:
 
     ```javascript
     export const users = [

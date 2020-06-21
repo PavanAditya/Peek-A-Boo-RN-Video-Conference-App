@@ -3,7 +3,7 @@ import Toast from 'react-native-simple-toast';
 import ConnectyCube from 'react-native-connectycube';
 import InCallManager from 'react-native-incall-manager';
 import Sound from 'react-native-sound';
-import {users} from '../config';
+import {users} from '../helpers/config';
 import AuthService from 'react-native-connectycube/lib/cubeAuth';
 
 export default class CallService {

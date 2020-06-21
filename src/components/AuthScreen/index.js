@@ -161,15 +161,7 @@ Password: Min 8 Characters`,
       ) {
         showAlert("Passwords doesn't match", 'Invalid Input');
       } else {
-        // alert(
-        //   this.state.register.fullName +
-        //     ' -- ' +
-        //     this.state.register.loginName +
-        //     ' -- ' +
-        //     this.state.register.password +
-        //     ' -- ' +
-        //     this.state.register.confirmPassword,
-        // );
+        this.setIsLogging(true);
         const dataUser = {
           full_name: this.state.register.fullName,
           login: this.state.register.loginName,
@@ -179,16 +171,21 @@ Password: Min 8 Characters`,
         AuthService.register(dataUser)
           .then(() => {
             this.setState({isLoader: false});
-            showAlert('Account successfully registered');
-            const {navigation} = this.props;
-            const opponentsIds = [];
-            const currentUserLoginId = dataUser.login;
-            const currentUserFullName = dataUser.full_name;
-            navigation.push('VideoScreen', {
-              opponentsIds,
-              currentUserLoginId,
-              currentUserFullName,
-            });
+            this.setIsLogging(false);
+            this.setState({view: 'login'});
+            showAlert(`Account successfully registered.
+Please Login with your details.`);
+            // ? automatic login commented
+            // const {navigation} = this.props;
+            // const opponentsIds = [];
+            // const currentUserLoginId = dataUser.login;
+            // const currentUserFullName = dataUser.full_name;
+            // navigation.push('VideoScreen', {
+            //   opponentsIds,
+            //   currentUserLoginId,
+            //   currentUserFullName,
+            // });
+            // ? automatic login commented
           })
           .catch(error => {
             this.setState({isLoader: false});
@@ -221,9 +218,9 @@ Password: Min 8 Characters`,
               styles.centeredChildren,
               {flexDirection: 'row'},
             ]}>
-            {isLogging && <Text>Connecting... </Text>}
-            {!isLogging && <Text style={[styles.titleText]}>Peek-A-Boo</Text>}
-            {isLogging && <ActivityIndicator size="small" color="white" />}
+            <Text style={[styles.titleText]}>Peek-A-Boo</Text>
+            {/* {isLogging && <Text color="white">Connecting... </Text>}
+            {isLogging && <ActivityIndicator size="small" color="white" />} */}
           </View>
         </SafeAreaView>
         <SafeAreaView style={[styles.authBtns, styles.f1]}>
@@ -313,9 +310,19 @@ Password: Min 8 Characters`,
                 </TouchableOpacity>
               </View>
               <View style={[styles.loginBtns]}>
-                <TouchableOpacity onPress={() => this.login()}>
-                  <View style={[styles.authBtn('#177987')]}>
-                    <Text style={styles.authBtnText}>{'Login'}</Text>
+                <TouchableOpacity
+                  disabled={isLogging}
+                  onPress={() => this.login()}>
+                  <View
+                    style={[
+                      styles.authBtn(isLogging ? '#17798775' : '#177987'),
+                    ]}>
+                    {!isLogging && (
+                      <Text style={styles.authBtnText}>{'Login'}</Text>
+                    )}
+                    {isLogging && (
+                      <ActivityIndicator size="small" color="white" />
+                    )}
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -423,13 +430,20 @@ Password: Min 8 Characters`,
                 </TouchableOpacity> */}
               </View>
               <View style={[styles.loginBtns]}>
-                <TouchableOpacity onPress={() => this.register()}>
+                <TouchableOpacity
+                  disabled={isLogging}
+                  onPress={() => this.register()}>
                   <View
                     style={[
-                      styles.authBtn('#177987'),
+                      styles.authBtn(isLogging ? '#17798775' : '#177987'),
                       styles.centeredChildren,
                     ]}>
-                    <Text style={styles.authBtnText}>{'Signup'}</Text>
+                    {!isLogging && (
+                      <Text style={styles.authBtnText}>{'Signup'}</Text>
+                    )}
+                    {isLogging && (
+                      <ActivityIndicator size="small" color="white" />
+                    )}
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -461,6 +475,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#001a15',
+    color: 'white',
   },
   logoImg: {
     width: '90%',

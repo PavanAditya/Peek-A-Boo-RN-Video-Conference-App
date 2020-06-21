@@ -33,20 +33,16 @@ export default ({
   const [searchValue, setSearchValue] = useState('');
 
   const colors = [
-    '#177987',
-    '#a5e900',
-    // '#5eba7d',
-    // '#3aad85',
-    // '#00a587',
-    // '#ff4e8f',
-    // '#ff005e',
-    // '#00abfe',
-    // '#53aaf0',
-    '#860000',
-    '#fd5a15',
-    '#b400fe',
-    '#ff7600',
-    '#ffe000',
+    '#008080',
+    '#e20056',
+    '#7900d9',
+    '#00912b',
+    '#d1383d',
+    '#39739d',
+    '#ea6700',
+    '#c72c00',
+    '#c7284e',
+    '#ba9800',
   ];
 
   const randomColor = () => {
@@ -146,7 +142,7 @@ export default ({
           const type = selected
             ? 'radio-button-checked'
             : 'radio-button-unchecked';
-          user.color = randomColor();
+          user.color = user.color ? user.color : randomColor();
           const onPress = selected ? unselectUser : selectUser;
           return (
             <View>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Navigator from './src/navigator';
+import Navigator from './src/helpers/navigator';
 import {AuthService} from './src/services';
 
 export default class App extends Component {

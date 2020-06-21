@@ -1,5 +1,5 @@
 import ConnectyCube from 'react-native-connectycube';
-import config from '../config';
+import config from '../helpers/config';
 import {AsyncStorage} from '@react-native-community/async-storage';
 
 export default class AuthService {
@@ -35,8 +35,9 @@ export default class AuthService {
       this.setUserSession(session);
       ConnectyCube.createSession(user)
         .then(() => {
+          console.log(session.user.id, 'kjsadkjsjsd');
           ConnectyCube.chat.connect({
-            userId: user.id,
+            userId: session.user.id,
             password: user.password,
           });
         })
@@ -46,9 +47,20 @@ export default class AuthService {
   };
 
   register = async user => {
-    await ConnectyCube.createSession();
+    const session = await ConnectyCube.createSession();
     await ConnectyCube.users.signup(user);
-    // return this.login(user);
+    return new Promise(async (resolve, reject) => {
+      ConnectyCube.createSession(user)
+        .then(() => {
+          console.log(session.user.id, 'kjsadkjsjsd');
+          ConnectyCube.chat.connect({
+            userId: session.user.id,
+            password: user.password,
+          });
+        })
+        .then(resolve(session))
+        .catch(reject);
+    });
   };
 
   logout = () => {
