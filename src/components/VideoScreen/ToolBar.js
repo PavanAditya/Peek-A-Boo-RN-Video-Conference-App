@@ -73,7 +73,7 @@ export default class ToolBar extends Component {
   hideVideo = () => {
     this.setState(prevState => {
       const video = !prevState.isVideoHidden;
-      CallService.setVideoHideState(video);
+      CallService.setHideVideo(video);
       return {isVideoHidden: video};
     });
   };
