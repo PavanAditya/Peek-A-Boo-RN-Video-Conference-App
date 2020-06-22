@@ -5,7 +5,7 @@
     <color android:color="@color/white"/>
   </item>
 
-  <item android:width="320dp" android:height="200dp" android:gravity="center">
+  <item android:width="450dp" android:height="900dp" android:gravity="center">
     <bitmap android:src="@drawable/ic_launcher"/>
   </item>
 </layer-list>

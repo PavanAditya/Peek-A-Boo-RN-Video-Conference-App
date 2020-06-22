@@ -11,6 +11,7 @@ export default class CallService {
   static MEDIA_OPTIONS = {audio: true, video: {facingMode: 'user'}};
 
   isFrontCamera = true;
+  hideVideo = undefined;
 
   _session = null;
   mediaDevices = [];
@@ -23,6 +24,14 @@ export default class CallService {
     const commonToast = Platform.OS === 'android' ? ToastAndroid : Toast;
 
     commonToast.showWithGravity(text, Toast.LONG, Toast.TOP);
+  };
+
+  isFrontCameraOn = () => {
+    this.isFrontCamera;
+  };
+
+  hideVideo = () => {
+    this.hideVideoId;
   };
 
   getUserNameById = (userId, key) => {
@@ -144,10 +153,12 @@ export default class CallService {
   };
 
   setVideoHideState = video => {
+    console.log(video, 'sdhds');
+    console.log(this._session, 'sesss');
     if (video) {
-      CallService.MEDIA_OPTIONS.video = false;
+      this._session.mediaParams.video = false;
     } else {
-      CallService.MEDIA_OPTIONS.video = {facingMode: 'user'};
+      this._session.mediaParams.video = {facingMode: 'user'};
     }
   };
 
@@ -157,9 +168,6 @@ export default class CallService {
   };
 
   setSpeakerphoneOn = flag => InCallManager.setSpeakerphoneOn(flag);
-
-  setHideVideo = flag =>
-    flag ? InCallManager.turnScreenOff() : InCallManager.turnScreenOn();
 
   processOnUserNotAnswerListener(userId) {
     return new Promise(async (resolve, reject) => {

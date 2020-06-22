@@ -27,13 +27,14 @@ export default ({streams}) => {
   };
 
   const RTCViewRendered = ({userId, stream, name, index}) => {
+    console.log(stream, 'shahhaa');
     if (stream) {
       return (
         <RTCView
           objectFit="cover"
           style={styles.blackView}
           key={userId}
-          mirror={CallService.isFrontCamera}
+          mirror={CallService.isFrontCameraOn()}
           streamURL={stream.toURL()}
         />
       );
