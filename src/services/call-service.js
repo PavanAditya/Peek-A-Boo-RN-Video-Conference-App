@@ -141,6 +141,14 @@ export default class CallService {
     }
   };
 
+  setVideoHideState = video => {
+    if (video) {
+      CallService.MEDIA_OPTIONS.video = true;
+    } else {
+      CallService.MEDIA_OPTIONS.video = {facingMode: 'user'};
+    }
+  };
+
   switchCamera = localStream => {
     localStream.getVideoTracks().forEach(track => track._switchCamera());
   };

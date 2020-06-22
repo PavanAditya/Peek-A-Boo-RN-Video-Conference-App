@@ -68,6 +68,8 @@ export default ({
           text: 'Yes',
           onPress: () => {
             AuthService.logout();
+            CallService.showToast("You've Successfully Logged out");
+            navigation = [];
             navigation.push('AuthScreen');
           },
           style: 'cancel',

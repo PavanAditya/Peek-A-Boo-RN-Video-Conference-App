@@ -6,6 +6,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
+    isVideoHidden: false,
     isFrontCamera: true,
     isSpeakerOn: true,
   };
@@ -66,6 +67,14 @@ export default class ToolBar extends Component {
     });
   };
 
+  hideVideo = () => {
+    this.setState(prevState => {
+      const video = !prevState.isVideoHidden;
+      CallService.setVideoHideState(video);
+      return {isVideoHidden: video};
+    });
+  };
+
   _renderCallStartStopButton = isCallInProgress => {
     const style = isCallInProgress ? styles.buttonCallEnd : styles.buttonCall;
     const onPress = isCallInProgress ? this.stopCall : this.startCall;
@@ -73,7 +82,7 @@ export default class ToolBar extends Component {
 
     return (
       <TouchableOpacity
-        style={[styles.buttonContainer, style]}
+        style={[styles.buttonContainer, style, styles.callButton]}
         onPress={onPress}>
         <MaterialIcon name={type} size={32} color="white" />
       </TouchableOpacity>
@@ -108,12 +117,25 @@ export default class ToolBar extends Component {
 
   _renderChangeAudioModeButton = () => {
     const {isSpeakerOn} = this.state;
-    const type = isSpeakerOn ? 'headset_mic' : 'volume_up';
+    const type = isSpeakerOn ? 'headset-mic' : 'volume-up';
 
     return (
       <TouchableOpacity
         style={[styles.buttonContainer, styles.buttonAudio]}
-        onPress={this.switchCamera}>
+        onPress={this.speakerOn}>
+        <MaterialIcon name={type} size={32} color="white" />
+      </TouchableOpacity>
+    );
+  };
+
+  _renderChangeVideoModeButton = () => {
+    const {isVideoHidden} = this.state;
+    const type = isVideoHidden ? 'videocam-off' : 'videocam';
+
+    return (
+      <TouchableOpacity
+        style={[styles.buttonContainer, styles.buttonVideo]}
+        onPress={this.hideVideo}>
         <MaterialIcon name={type} size={32} color="white" />
       </TouchableOpacity>
     );
@@ -127,6 +149,9 @@ export default class ToolBar extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.toolBarItem}>
+          {isActiveCall && this._renderChangeVideoModeButton()}
+        </View>
         <View style={styles.toolBarItem}>
           {isActiveCall && this._renderMuteButton()}
         </View>
@@ -183,5 +208,12 @@ const styles = StyleSheet.create({
   },
   buttonAudio: {
     backgroundColor: '#ea6700',
+  },
+  buttonVideo: {
+    backgroundColor: '#c72c00',
+  },
+  callButton: {
+    height: 60,
+    width: 60,
   },
 });
