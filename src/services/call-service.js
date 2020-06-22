@@ -10,6 +10,8 @@ import {showAlert} from '../helpers/Alert';
 export default class CallService {
   static MEDIA_OPTIONS = {audio: true, video: {facingMode: 'user'}};
 
+  isFrontCamera = true;
+
   _session = null;
   mediaDevices = [];
 
@@ -143,17 +145,21 @@ export default class CallService {
 
   setVideoHideState = video => {
     if (video) {
-      CallService.MEDIA_OPTIONS.video = true;
+      CallService.MEDIA_OPTIONS.video = false;
     } else {
       CallService.MEDIA_OPTIONS.video = {facingMode: 'user'};
     }
   };
 
-  switchCamera = localStream => {
+  switchCamera = (localStream, isFrontCamera) => {
+    this.isFrontCamera = isFrontCamera;
     localStream.getVideoTracks().forEach(track => track._switchCamera());
   };
 
   setSpeakerphoneOn = flag => InCallManager.setSpeakerphoneOn(flag);
+
+  setHideVideo = flag =>
+    flag ? InCallManager.turnScreenOff() : InCallManager.turnScreenOn();
 
   processOnUserNotAnswerListener(userId) {
     return new Promise(async (resolve, reject) => {

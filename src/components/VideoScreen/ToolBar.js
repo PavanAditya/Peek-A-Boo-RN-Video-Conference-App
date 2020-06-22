@@ -6,8 +6,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
-    isVideoHidden: false,
     isFrontCamera: true,
+    isVideoHidden: false,
     isSpeakerOn: true,
   };
 
@@ -16,6 +16,8 @@ export default class ToolBar extends Component {
       return {
         isAudioMuted: false,
         isFrontCamera: true,
+        isVideoHidden: false,
+        isSpeakerOn: true,
       };
     }
   }
@@ -48,14 +50,15 @@ export default class ToolBar extends Component {
   switchCamera = () => {
     const {localStream} = this.props;
 
-    CallService.switchCamera(localStream);
+    CallService.switchCamera(localStream, !this.state.isFrontCamera);
     this.setState(prevState => ({isFrontCamera: !prevState.isFrontCamera}));
   };
 
   speakerOn = () => {
     const {localStream} = this.props;
-
-    CallService.setSpeakerphoneOn(localStream);
+    console.log(localStream, 'localStream');
+    console.log(!this.state.isSpeakerOn, 'localStream--111');
+    CallService.setSpeakerphoneOn(!this.state.isSpeakerOn);
     this.setState(prevState => ({isSpeakerOn: !prevState.isSpeakerOn}));
   };
 
