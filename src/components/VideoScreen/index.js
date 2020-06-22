@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import ConnectyCube from 'react-native-connectycube';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import InCallManager from 'react-native-incall-manager';
 import RTCViewGrid from './RTCViewGrid';
 import {CallService, AuthService} from '../../services';
 import ToolBar from './ToolBar';
@@ -23,6 +24,7 @@ export default class VideoScreen extends React.Component {
       isActiveSelect: true,
       isActiveCall: false,
       isIncomingCall: false,
+      incomingCallerName: '',
     };
 
     this._setUpListeners();
@@ -193,9 +195,11 @@ export default class VideoScreen extends React.Component {
       .catch(this.hideInomingCallModal);
   };
 
-  getUserName = id => {
+  getUserName = async id => {
     console.log('11');
-    CallService.getUserById(id, 'name');
+    this.setState({
+      incomingCallerName: await CallService.getUserById(id, 'name'),
+    });
   };
 
   render() {
@@ -208,15 +212,15 @@ export default class VideoScreen extends React.Component {
       isIncomingCall,
     } = this.state;
 
-    const initiatorName = isIncomingCall
-      ? this.getUserName(this._session.initiatorID)
-      : '';
+    isIncomingCall ? this.getUserName(this._session.initiatorID, 'name') : '';
+    const initiatorName = isIncomingCall ? this.state.incomingCallerName : '';
     const localStreamItem = localStream
       ? [{userId: 'localStream', stream: localStream}]
       : [];
     const streams = [...remoteStreams, ...localStreamItem];
 
     CallService.setSpeakerphoneOn(remoteStreams.length > 0);
+    // CallService.setSpeakerphoneOn(!InCallManager.getIsWiredHeadsetPluggedIn());
 
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
@@ -253,12 +257,13 @@ export default class VideoScreen extends React.Component {
           cancelText="Reject"
           confirmText="Accept"
           cancelButtonColor="red"
-          confirmButtonColor="green"
+          confirmButtonColor="#177987"
           onCancelPressed={this._onPressReject}
           onConfirmPressed={this._onPressAccept}
           onDismiss={this.hideInomingCallModal}
           alertContainerStyle={{zIndex: 1}}
-          titleStyle={{fontSize: 21}}
+          contentContainerStyle={{backgroundColor: '#3c3c3c'}}
+          titleStyle={{fontSize: 22, color: 'white'}}
           cancelButtonTextStyle={{fontSize: 18}}
           confirmButtonTextStyle={{fontSize: 18}}
         />

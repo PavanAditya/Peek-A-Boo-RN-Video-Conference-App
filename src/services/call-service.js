@@ -148,12 +148,12 @@ export default class CallService {
   setSpeakerphoneOn = flag => InCallManager.setSpeakerphoneOn(flag);
 
   processOnUserNotAnswerListener(userId) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (!this._session) {
         reject();
       } else {
         console.log('3');
-        const userName = this.getUserById(userId, 'name');
+        const userName = await this.getUserById(userId, 'name');
         const message = `${userName} did not answer`;
 
         this.showToast(message);
@@ -181,7 +181,7 @@ export default class CallService {
   }
 
   processOnAcceptCallListener(session, userId, extension = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (userId === session.currentUserID) {
         this._session = null;
         this.showToast('You have accepted the call on other side');
@@ -189,7 +189,7 @@ export default class CallService {
         reject();
       } else {
         console.log('4');
-        const userName = this.getUserById(userId, 'name');
+        const userName = await this.getUserById(userId, 'name');
         const message = `${userName} has accepted the call`;
 
         this.showToast(message);
@@ -201,7 +201,7 @@ export default class CallService {
   }
 
   processOnRejectCallListener(session, userId, extension = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (userId === session.currentUserID) {
         this._session = null;
         this.showToast('You have rejected the call on other side');
@@ -209,7 +209,7 @@ export default class CallService {
         reject();
       } else {
         console.log('5');
-        const userName = this.getUserById(userId, 'name');
+        const userName = await this.getUserById(userId, 'name');
         const message = extension.busy
           ? `${userName} is busy`
           : `${userName} rejected the call request`;
@@ -222,14 +222,14 @@ export default class CallService {
   }
 
   processOnStopCallListener(userId, isInitiator) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       this.stopSounds();
 
       if (!this._session) {
         reject();
       } else {
         console.log('6');
-        const userName = this.getUserById(userId, 'name');
+        const userName = await this.getUserById(userId, 'name');
         const message = `${userName} has ${
           isInitiator ? 'stopped' : 'left'
         } the call`;

@@ -7,6 +7,7 @@ export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
     isFrontCamera: true,
+    isSpeakerOn: true,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -48,6 +49,13 @@ export default class ToolBar extends Component {
 
     CallService.switchCamera(localStream);
     this.setState(prevState => ({isFrontCamera: !prevState.isFrontCamera}));
+  };
+
+  speakerOn = () => {
+    const {localStream} = this.props;
+
+    CallService.setSpeakerphoneOn(localStream);
+    this.setState(prevState => ({isSpeakerOn: !prevState.isSpeakerOn}));
   };
 
   muteUnmuteAudio = () => {
@@ -98,6 +106,19 @@ export default class ToolBar extends Component {
     );
   };
 
+  _renderChangeAudioModeButton = () => {
+    const {isSpeakerOn} = this.state;
+    const type = isSpeakerOn ? 'headset_mic' : 'volume_up';
+
+    return (
+      <TouchableOpacity
+        style={[styles.buttonContainer, styles.buttonAudio]}
+        onPress={this.switchCamera}>
+        <MaterialIcon name={type} size={32} color="white" />
+      </TouchableOpacity>
+    );
+  };
+
   render() {
     const {isActiveSelect, isActiveCall} = this.props;
     const isCallInProgress = isActiveCall || !isActiveSelect;
@@ -114,6 +135,9 @@ export default class ToolBar extends Component {
         </View>
         <View style={styles.toolBarItem}>
           {isAvailableToSwitch && this._renderSwitchVideoSourceButton()}
+        </View>
+        <View style={styles.toolBarItem}>
+          {isActiveCall && this._renderChangeAudioModeButton()}
         </View>
       </SafeAreaView>
     );
@@ -152,9 +176,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff0000',
   },
   buttonMute: {
-    backgroundColor: '#0000ff',
+    backgroundColor: '#ba9800',
   },
   buttonSwitch: {
-    backgroundColor: '#ffbb3d',
+    backgroundColor: '#7900d9',
+  },
+  buttonAudio: {
+    backgroundColor: '#ea6700',
   },
 });

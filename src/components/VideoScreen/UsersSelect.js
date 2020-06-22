@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 250,
+    marginLeft: SIZE_SCREEN.width - 165,
     marginTop: 10,
     paddingTop: 12,
     paddingLeft: 10,

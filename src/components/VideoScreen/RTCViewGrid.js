@@ -33,6 +33,7 @@ export default ({streams}) => {
           objectFit="cover"
           style={styles.blackView}
           key={userId}
+          mirror={false}
           streamURL={stream.toURL()}
         />
       );
