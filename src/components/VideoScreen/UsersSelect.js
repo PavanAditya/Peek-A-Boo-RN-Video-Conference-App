@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 28,
-    width: 235,
+    width: SIZE_SCREEN.width - 175,
     fontWeight: '700',
     color: '#009378',
   },
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: SIZE_SCREEN.width - 165,
+    marginLeft: SIZE_SCREEN.width - 160,
     marginTop: 10,
     paddingTop: 12,
     paddingLeft: 10,

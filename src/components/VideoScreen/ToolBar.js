@@ -7,7 +7,7 @@ export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
     isFrontCamera: true,
-    isVideoHidden: false,
+    isVideoHidden: true,
     isSpeakerOn: true,
   };
 
@@ -71,11 +71,19 @@ export default class ToolBar extends Component {
   };
 
   hideVideo = () => {
+    // this.setState(prevState => {
+    //   const video = !prevState.isVideoHidden;
+    //   CallService.setVideoHideState(video);
+    //   return {isVideoHidden: video};
+    // });
+
+    // ? Used As Flash On/Off Button with video variable names
     this.setState(prevState => {
       const video = !prevState.isVideoHidden;
       CallService.setVideoHideState(video);
       return {isVideoHidden: video};
     });
+    // ? Used As Flash On/Off Button with video variable names
   };
 
   _renderCallStartStopButton = isCallInProgress => {
@@ -133,7 +141,8 @@ export default class ToolBar extends Component {
 
   _renderChangeVideoModeButton = () => {
     const {isVideoHidden} = this.state;
-    const type = isVideoHidden ? 'videocam-off' : 'videocam';
+    // const type = isVideoHidden ? 'videocam-off' : 'videocam';
+    const type = isVideoHidden ? 'flash-on' : 'flash-off';
 
     return (
       <TouchableOpacity
@@ -204,10 +213,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff0000',
   },
   buttonMute: {
-    backgroundColor: '#ba9800',
+    backgroundColor: '#d1383d',
   },
   buttonSwitch: {
-    backgroundColor: '#7900d9',
+    backgroundColor: '#39739d',
   },
   buttonAudio: {
     backgroundColor: '#ea6700',

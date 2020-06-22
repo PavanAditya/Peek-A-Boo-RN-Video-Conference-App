@@ -6,12 +6,13 @@ import Sound from 'react-native-sound';
 import {users} from '../helpers/config';
 import AuthService from 'react-native-connectycube/lib/cubeAuth';
 import {showAlert} from '../helpers/Alert';
+import RTCViewGrid from '../components/VideoScreen/RTCViewGrid';
 
 export default class CallService {
   static MEDIA_OPTIONS = {audio: true, video: {facingMode: 'user'}};
 
   isFrontCamera = true;
-  hideVideo = undefined;
+  hideUsers = [];
 
   _session = null;
   mediaDevices = [];
@@ -28,10 +29,6 @@ export default class CallService {
 
   isFrontCameraOn = () => {
     this.isFrontCamera;
-  };
-
-  hideVideo = () => {
-    this.hideVideoId;
   };
 
   getUserNameById = (userId, key) => {
@@ -155,12 +152,31 @@ export default class CallService {
   setVideoHideState = video => {
     console.log(video, 'sdhds');
     console.log(this._session, 'sesss');
-    if (video) {
-      this._session.mediaParams.video = false;
-    } else {
-      this._session.mediaParams.video = {facingMode: 'user'};
-    }
+    // if (video) {
+    //   this._session.mediaParams.video = false;
+    // } else {
+    //   this._session.mediaParams.video = {facingMode: 'user'};
+    // }
+    flag => InCallManager.setFlashOn(flag);
   };
+
+  // setVideoHideState = video => {
+  //   console.log(video, 'sdhds');
+  //   console.log(this._session, 'sesss');
+  //   if (video) {
+  //     this.hideUsers.indexOf(this._session.currentUserID) === -1
+  //       ? this.hideUsers.push(this._session.currentUserID)
+  //       : '';
+  //   } else {
+  //     this.hideUsers = this.hideUsers.filter(
+  //       el => el !== this._session.currentUserID,
+  //     );
+  //   }
+  // };
+
+  // getHiddenUsers = () => {
+  //   return this.hideUsers;
+  // };
 
   switchCamera = (localStream, isFrontCamera) => {
     this.isFrontCamera = isFrontCamera;

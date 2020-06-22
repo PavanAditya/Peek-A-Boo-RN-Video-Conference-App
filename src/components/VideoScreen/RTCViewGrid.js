@@ -34,7 +34,7 @@ export default ({streams}) => {
           objectFit="cover"
           style={styles.blackView}
           key={userId}
-          mirror={CallService.isFrontCameraOn()}
+          mirror={true}
           streamURL={stream.toURL()}
         />
       );

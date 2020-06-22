@@ -198,7 +198,7 @@ export default class VideoScreen extends React.Component {
   getUserName = async id => {
     console.log('11');
     this.setState({
-      incomingCallerName: await CallService.getUserById(id, 'name'),
+      incomingCallerName: 'from ' + (await CallService.getUserById(id, 'name')),
     });
   };
 
@@ -249,7 +249,7 @@ export default class VideoScreen extends React.Component {
         <AwesomeAlert
           show={isIncomingCall}
           showProgress={false}
-          title={`Incoming call from ${initiatorName}`}
+          title={`Incoming call ${initiatorName}`}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={true}
           showCancelButton={true}
