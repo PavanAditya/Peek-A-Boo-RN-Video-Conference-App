@@ -149,7 +149,7 @@ export default class CallService {
     }
   };
 
-  setVideoHideState = video => {
+  setVideoHideState = (localStream, video) => {
     console.log(video, 'sdhds');
     console.log(this._session, 'sesss');
     // if (video) {
@@ -157,7 +157,13 @@ export default class CallService {
     // } else {
     //   this._session.mediaParams.video = {facingMode: 'user'};
     // }
-    flag => InCallManager.setFlashOn(flag);
+    // flag => InCallManager.setFlashOn(flag);
+
+    localStream.getTracks().forEach(track => {
+      if (track.kind === 'video') {
+        track.enabled = video;
+      }
+    });
   };
 
   // setVideoHideState = video => {
