@@ -30,7 +30,7 @@ export default class AuthScreen extends PureComponent {
     showAlert(
       `Someother device is currently using Guest Login.
 Please Login/SignUp directly to proceed further.`,
-      'Error',
+      'Duplicate Login',
     );
   };
 
@@ -239,7 +239,7 @@ Please Login with your details.`);
                 <TextInput
                   style={[styles.searchInput]}
                   autoCapitalize="none"
-                  placeholder="Login name"
+                  placeholder="Login name(Email)"
                   returnKeyType="next"
                   autoFocus={true}
                   onSubmitEditing={() => this.passwordRef.focus()}

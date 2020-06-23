@@ -11,8 +11,8 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import com.peekaboo.BuildConfig;
-import com.peekaboo.R;
+import com.msppeekaboo.BuildConfig;
+import com.msppeekaboo.R;
 
 // @react-native-community/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
