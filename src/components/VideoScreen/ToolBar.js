@@ -7,7 +7,7 @@ export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
     isFrontCamera: true,
-    isVideoHidden: true,
+    isVideoHidden: false,
     isSpeakerOn: true,
   };
 
@@ -35,7 +35,7 @@ export default class ToolBar extends Component {
     } else {
       closeSelect();
       initRemoteStreams(selectedUsersIds);
-      CallService.showToast('Calling Friends.');
+      CallService.showToast('Calling Friends');
       CallService.startCall(selectedUsersIds).then(setLocalStream);
     }
   };

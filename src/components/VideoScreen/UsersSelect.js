@@ -277,7 +277,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     marginTop: 15,
-    marginLeft: 50,
     paddingLeft: 65,
   }),
   searchText: {
@@ -294,9 +293,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomWidth: 1,
     borderColor: '#177987',
+    width: '100%',
   },
   description: {
     width: SIZE_SCREEN.width - 110,
+    alignItems: 'center',
   },
   descriptionText: {
     paddingVertical: 5,

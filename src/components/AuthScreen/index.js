@@ -240,7 +240,9 @@ Please Login with your details.`);
                   style={[styles.searchInput]}
                   autoCapitalize="none"
                   placeholder="Login name"
-                  returnKeyType="search"
+                  returnKeyType="next"
+                  autoFocus={true}
+                  onSubmitEditing={() => this.passwordRef.focus()}
                   onChangeText={keyword =>
                     this.setState({
                       login: {...this.state.login, loginName: keyword},
@@ -253,11 +255,12 @@ Please Login with your details.`);
               </View>
               <View style={[styles.inputContainer]}>
                 <TextInput
+                  ref={passwordRef => (this.passwordRef = passwordRef)}
                   style={[styles.searchInput]}
                   secureTextEntry={this.state.viewPassInputLogin ? true : false}
                   autoCapitalize="none"
                   placeholder="Password"
-                  returnKeyType="search"
+                  returnKeyType="enter"
                   onChangeText={keyword =>
                     this.setState({
                       login: {...this.state.login, password: keyword},
@@ -315,7 +318,9 @@ Please Login with your details.`);
                   style={[styles.searchInput]}
                   autoCapitalize="none"
                   placeholder="Enter Your name"
-                  returnKeyType="search"
+                  returnKeyType="next"
+                  autoFocus={true}
+                  onSubmitEditing={() => this.emailRef.focus()}
                   onChangeText={keyword =>
                     this.setState({
                       register: {...this.state.register, fullName: keyword},
@@ -327,10 +332,12 @@ Please Login with your details.`);
               </View>
               <View style={[styles.inputContainer]}>
                 <TextInput
+                  ref={emailRef => (this.emailRef = emailRef)}
                   style={[styles.searchInput]}
                   autoCapitalize="none"
                   placeholder="Login name (Email)"
-                  returnKeyType="search"
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.passRef.focus()}
                   onChangeText={keyword =>
                     this.setState({
                       register: {...this.state.register, loginName: keyword},
@@ -342,11 +349,13 @@ Please Login with your details.`);
               </View>
               <View style={[styles.inputContainer]}>
                 <TextInput
+                  ref={passRef => (this.passRef = passRef)}
                   style={[styles.searchInput]}
                   secureTextEntry={this.state.viewPassInputReg ? true : false}
                   autoCapitalize="none"
                   placeholder="Password"
-                  returnKeyType="search"
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.confPassRef.focus()}
                   onChangeText={keyword =>
                     this.setState({
                       register: {...this.state.register, password: keyword},
@@ -370,12 +379,13 @@ Please Login with your details.`);
               </View>
               <View style={[styles.inputContainer]}>
                 <TextInput
+                  ref={confPassRef => (this.confPassRef = confPassRef)}
                   style={[styles.searchInput]}
                   // secureTextEntry={this.state.viewPassInputLogin ? true : false}
                   secureTextEntry={true}
                   autoCapitalize="none"
                   placeholder="Confirm Password"
-                  returnKeyType="search"
+                  returnKeyType="enter"
                   onChangeText={keyword =>
                     this.setState({
                       register: {
