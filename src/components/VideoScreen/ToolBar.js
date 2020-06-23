@@ -7,7 +7,7 @@ export default class ToolBar extends Component {
   state = {
     isAudioMuted: false,
     isFrontCamera: true,
-    isVideoHidden: false,
+    isVideoOn: true,
     isSpeakerOn: true,
   };
 
@@ -16,7 +16,7 @@ export default class ToolBar extends Component {
       return {
         isAudioMuted: false,
         isFrontCamera: true,
-        isVideoHidden: false,
+        isVideoOn: true,
         isSpeakerOn: true,
       };
     }
@@ -74,16 +74,16 @@ export default class ToolBar extends Component {
     this.setState(prevState => {
       const {localStream} = this.props;
       console.log(localStream, 'localStream');
-      const video = !prevState.isVideoHidden;
+      const video = !prevState.isVideoOn;
       CallService.setVideoHideState(localStream, video);
-      return {isVideoHidden: video};
+      return {isVideoOn: video};
     });
 
     // ? Used As Flash On/Off Button with video variable names
     // this.setState(prevState => {
-    //   const video = !prevState.isVideoHidden;
+    //   const video = !prevState.isVideoOn;
     //   CallService.setVideoHideState(video);
-    //   return {isVideoHidden: video};
+    //   return {isVideoOn: video};
     // });
     // ? Used As Flash On/Off Button with video variable names
   };
@@ -142,9 +142,9 @@ export default class ToolBar extends Component {
   };
 
   _renderChangeVideoModeButton = () => {
-    const {isVideoHidden} = this.state;
-    const type = isVideoHidden ? 'videocam-off' : 'videocam';
-    // const type = isVideoHidden ? 'flash-on' : 'flash-off';
+    const {isVideoOn} = this.state;
+    const type = isVideoOn ? 'videocam-off' : 'videocam';
+    // const type = isVideoOn ? 'flash-on' : 'flash-off';
 
     return (
       <TouchableOpacity
